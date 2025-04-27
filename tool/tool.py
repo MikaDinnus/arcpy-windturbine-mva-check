@@ -58,6 +58,11 @@ def write_maximum_height():
             hgt_cursor.updateRow(row)
         
         return "Maximum height added."
+    
+def print_maximum_height():
+    with arcpy.da.SearchCursor(turbines, ["FID", "max_meter"]) as hgt_cursor:
+        for row in hgt_cursor:
+            print(f"Turbine {row[0]} maximum height of {row[1]}m.")
 
 # main func
 if __name__ == "__main__":
@@ -65,5 +70,6 @@ if __name__ == "__main__":
         print(get_turbine_dem())
         print(get_turbine_mva())
         print(write_maximum_height())
+        print_maximum_height()
     finally:
         arcpy.CheckInExtension("Spatial")
